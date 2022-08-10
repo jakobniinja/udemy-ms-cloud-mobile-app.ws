@@ -1,9 +1,10 @@
 package com.jakobniinja.mobileappws.ui.controller;
 
 import com.jakobniinja.mobileappws.ui.modal.UserRest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("users")
@@ -16,14 +17,16 @@ public class UserController {
         return "get user was called page:" + page + ", limit: " + limit + " & sort " + sort;
     }
 
-    @GetMapping(path = "/{userId}")
-    public UserRest getUser(@PathVariable String userId) {
+    @GetMapping(path = "/{userId}", produces = {
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<UserRest> getUser(@PathVariable String userId) {
         UserRest userRest = new UserRest();
         userRest.setEmail("test@test.com");
         userRest.setFirstName("jakob");
         userRest.setLastName("yaro");
         userRest.setUserId(userId);
-        return userRest;
+        return new ResponseEntity<UserRest>(userRest,HttpStatus.BAD_REQUEST);
     }
 
 
