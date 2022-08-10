@@ -1,4 +1,4 @@
-package com.jakobniinja.mobileappws.ui.modal;
+package com.jakobniinja.mobileappws.ui.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

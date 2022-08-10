@@ -1,6 +1,7 @@
 package com.jakobniinja.mobileappws.ui.controller;
 
-import com.jakobniinja.mobileappws.ui.modal.UserRest;
+import com.jakobniinja.mobileappws.ui.model.UserRest;
+import com.jakobniinja.mobileappws.ui.request.UserDetailsRequestModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,13 +27,20 @@ public class UserController {
         userRest.setFirstName("jakob");
         userRest.setLastName("yaro");
         userRest.setUserId(userId);
-        return new ResponseEntity<UserRest>(userRest,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<UserRest>(userRest, HttpStatus.BAD_REQUEST);
     }
 
 
-    @PostMapping
-    public String createUser() {
-        return "create user was called";
+    @PostMapping(
+            consumes= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}
+    )
+    public ResponseEntity<UserRest> createUser(@RequestBody UserDetailsRequestModel userDetails) {
+        UserRest userRest = new UserRest();
+        userRest.setEmail(userDetails.getEmail());
+        userRest.setFirstName(userDetails.getFirstName());
+        userRest.setLastName(userDetails.getLastName());
+        return new ResponseEntity<UserRest>(userRest, HttpStatus.SEE_OTHER);
     }
 
     @PutMapping
