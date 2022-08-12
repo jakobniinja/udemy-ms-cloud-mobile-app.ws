@@ -1,4 +1,4 @@
-package com.jakobniinja.mobileappws.ui.model;
+package com.jakobniinja.mobileappws.ui.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
